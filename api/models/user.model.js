@@ -9,8 +9,13 @@ const userSchema = new Schema(
       type: String,
       required: "Name is required",
       minlength: [3, "Name must be at least 3 characters"],
-      //Surname? REGEX o algo para nombre + apellido tipo .contains ' '
     },
+    surname: {
+      type: String,
+      required: "Surname is required",
+      minlength: [3, "surname must be at least 3 characters"],
+    },
+
     username: {
       type: String,
       required: "Name is required",

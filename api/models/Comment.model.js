@@ -17,6 +17,12 @@ const commentSchema = new Schema(
       ref: "User",
       required: "Comment author is required",
     },
+    rating: {
+      type: Number,
+      min: 1,
+      max: 5,
+      required: "Product rating is required",
+    }
   },
   {
     timestamps: true,
