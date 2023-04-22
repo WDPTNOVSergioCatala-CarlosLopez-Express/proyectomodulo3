@@ -1,5 +1,6 @@
-const mongoose = required("mongoose");
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+
 
 const productSchema = new Schema({
   name: {
@@ -53,7 +54,7 @@ const productSchema = new Schema({
   },
 });
 
-projectSchema.virtual("comments", {
+productSchema.virtual("comments", {
   ref: "Comment",
   localField: "_id",
   foreignField: "product",
