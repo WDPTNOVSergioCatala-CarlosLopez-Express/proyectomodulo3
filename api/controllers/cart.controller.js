@@ -1,46 +1,63 @@
-const Cart = require('../models/cart.model');
-
+const Cart = require("../models/cart.model");
 
 module.exports.list = (req, res, next) => {
-    Cart.find()
-        .then(cart => res.json(cart))
-        .catch(next);
-}
+  Cart.find()
+    .then((cart) => res.json(cart))
+    .catch(next);
+};
 
 module.exports.update = (req, res, next) => {
-    Cart.findById(req.params.id)
-        .populate("products")
-        .then(cart => {
-            cart.items = req.body.items;
-            cart.owner = req.user.id;
-            cart.totalPrice = req.body.items;
-        })
-        .catch(next);
-}
 
-module.exports.delete = (req, res, next) => {
-    Cart.findByIdAndDelete(req.params.id)
-        .then(() => res.json('Cart deleted.'))
-        .catch(next);
-}
+    const owner = req.user._id.toString();
+    const productId = req.params.productId;
+    const quantity = parseInt(req.params.quantity);
+  
+    if (isNaN(quantity) || quantity <= 0) {
+      return next(createError(400, "Invalid quantity"));
+    }
+  
+    Cart.findOne({ owner })
+      .then((cart) => {
+        if (!cart) {
+          return Cart.create({
+            owner: owner,
+            products: [{ product: productId, quantity: quantity }],
+          })
+            .then(() => res.status(201).json())
+            .catch((error) => next(error));
+        }
+        if (!cart.products) {
+            cart.products = [];
+          }
+        const productIndex = cart.products.findIndex(
+          (p) => p.product == productId
+        );
+  
+        if (productIndex == -1) {
+          cart.products.push({ product: productId, quantity: quantity });
+        } else {
+          cart.products[productIndex].quantity += quantity;
+        }
+  
+        return cart
+          .save()
+          .then(() => res.status(202).json())
+          .catch(next);
+      })
+      .catch(next);
+  };
 
-module.exports.add = (req, res, next) => {
-    const owner = req.user.id;
 
-    Cart.findOne({owner})
-        .then(cart => {
-            if (cart){
-                res.status(200).json(cart)
-            } else {
-                next(createError(404, "Cart not appear"))
-            }
-        })
-        .catch(next)
-}
 
 module.exports.remove = (req, res, next) => {
-    const name = req.body.name;
-    const quantity = req.body.quantity;
-}
+    const userId = req.user.id;
 
-
+    Cart.findOneAndUpdate({ owner: userId }, { products: [] })
+      .then((cart) => {
+        if (!cart) {
+          throw createError(404, 'Cart not found');
+        }
+        res.status(204).json();
+      })
+      .catch((error) => next(error));
+};

@@ -27,15 +27,21 @@ module.exports.auth = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     User.findById(decoded.sub)
-      .then((user) => {
-        if (user) {
-          req.user = user;
-          next();
-        } else {
-          next(createError(401, "User not found"));
-        }
-      })
-      .catch(next);
+  .then((user) => {
+    if (user) {
+      req.user = user;
+      delete req.user.__v;
+      req.user.id = req.user._id.toString();
+      delete req.user._id;
+
+      console.log(req.user); // aquí se muestra la respuesta modificada
+
+      next();
+    } else {
+      next(createError(401, "User not found"));
+    }
+  })
+  .catch(next);
   } catch (err) {
     next(createError(401, err));
   }

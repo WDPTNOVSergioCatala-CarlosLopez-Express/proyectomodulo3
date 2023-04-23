@@ -30,10 +30,7 @@ router.delete("/products/:id/review/:reviewId", secure.auth, productsMid.exists,
 
 //populate, localstorage
 router.get("/cart", cart.list);
-router.patch("/cart/:id", cart.update);
-router.delete("/cart/:id", cart.delete);
-
-router.post("/cart/add",secure.auth, cart.add);
+router.patch("/cart/:productId/:quantity",secure.auth, cart.update);
 router.post("/cart/:id/remove", cart.remove);
 
 router.get("/orders", orders.list);
