@@ -1,61 +1,57 @@
-import React from "react";
+import React from 'react'
 
 function navbar() {
   return (
-    <nav className="flex justify-between bg-gray-900 text-white w-screen">
-    <div className="px-5 xl:px-12 py-6 flex w-full items-center">
-      <a className="text-3xl font-bold font-heading" href="#">
-      <img className="h-9" src="../../resources/images/logo.png" alt="logo" />
-      </a>
-      <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
-        <li><a className="hover:text-gray-200" href="#">Home</a></li>
-        <li><a className="hover:text-gray-200" href="#">Category</a></li>
-        <li><a className="hover:text-gray-200" href="#">Configurator</a></li>
-        <li><a className="hover:text-gray-200" href="#">Contact Us</a></li>
-      </ul>
-     
-      <div className="hidden xl:flex items-center space-x-5 items-center">
-        <a className="hover:text-gray-200" href="#">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-          </svg>
-        </a>
-        <a className="flex items-center hover:text-gray-200" href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
-          <span className="flex absolute -mt-5 ml-4">
-            <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-pink-500">
-              </span>
+    <div><nav className="bg-gray-800">
+    <div className="container flex">
+        <div className="px-8 py-4 bg-primary flex items-center cursor-pointer relative group">
+            <span className="text-white">
+                <i className="fa-solid fa-bars"></i>
             </span>
-        </a>
+            <span className="capitalize ml-2 text-white">All Categories</span>
+          
+            {/* dropdown */}
+            <div
+                className="absolute w-full left-0 top-full bg-white shadow-md py-3 divide-y divide-gray-300 divide-dashed opacity-0 group-hover:opacity-100 transition duration-300 invisible group-hover:visible">
+                <a href="#" className="flex items-center px-6 py-3 hover:bg-gray-100 transition">
+                    <img src="assets/images/icons/sofa.svg" alt="sofa" className="w-5 h-5 object-contain" />
+                    <span className="ml-6 text-gray-600 text-sm">Sofa</span>
+                </a>
+                <a href="#" className="flex items-center px-6 py-3 hover:bg-gray-100 transition">
+                    <img src="assets/images/icons/terrace.svg" alt="terrace" className="w-5 h-5 object-contain" />
+                    <span className="ml-6 text-gray-600 text-sm">Terarce</span>
+                </a>
+                <a href="#" className="flex items-center px-6 py-3 hover:bg-gray-100 transition">
+                    <img src="assets/images/icons/bed.svg" alt="bed" className="w-5 h-5 object-contain" />
+                    <span className="ml-6 text-gray-600 text-sm">Bed</span>
+                </a>
+                <a href="#" className="flex items-center px-6 py-3 hover:bg-gray-100 transition">
+                    <img src="assets/images/icons/office.svg" alt="office" className="w-5 h-5 object-contain" />
+                    <span className="ml-6 text-gray-600 text-sm">office</span>
+                </a>
+                <a href="#" className="flex items-center px-6 py-3 hover:bg-gray-100 transition">
+                    <img src="assets/images/icons/outdoor-cafe.svg" alt="outdoor" className="w-5 h-5 object-contain" />
+                    <span className="ml-6 text-gray-600 text-sm">Outdoor</span>
+                </a>
+                <a href="#" className="flex items-center px-6 py-3 hover:bg-gray-100 transition">
+                    <img src="assets/images/icons/bed-2.svg" alt="Mattress" className="w-5 h-5 object-contain" />
+                    <span className="ml-6 text-gray-600 text-sm">Mattress</span>
+                </a>
+            </div>
+        </div>
 
-        <a className="flex items-center hover:text-gray-200" href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-        </a>
-        
-      </div>
+        <div className="flex items-center justify-between flex-grow pl-12">
+            <div className="flex items-center space-x-6 capitalize">
+                <a href="index.html" className="text-gray-200 hover:text-white transition">Home</a>
+                <a href="pages/shop.html" className="text-gray-200 hover:text-white transition">Shop</a>
+                <a href="#" className="text-gray-200 hover:text-white transition">About us</a>
+                <a href="#" className="text-gray-200 hover:text-white transition">Contact us</a>
+            </div>
+            <a href="pages/login.html" className="text-gray-200 hover:text-white transition">Login</a>
+        </div>
     </div>
-    <a className="xl:hidden flex mr-6 items-center" href="#">
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-      </svg>
-      <span className="flex absolute -mt-5 ml-4">
-        <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
-        <span className="relative inline-flex rounded-full h-3 w-3 bg-pink-500">
-        </span>
-      </span>
-    </a>
-    <a className="navbar-burger self-center mr-12 xl:hidden" href="#">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-    </a>
-  </nav>
-  );
+</nav></div>
+  )
 }
 
-export default navbar;
+export default navbar
