@@ -17,14 +17,12 @@ const cartSchema = new Schema(
         },
         quantity: {
           type: Number,
-          min: [-1, "min quantity of products is -1"],
+          min: [0, "min quantity of products is 0"],
         },
       },
     ],
-    totalPrice: {
-      type: Number,
-    },
   },
+  
   {
     timestamps: true,
     toJSON: {
@@ -38,6 +36,12 @@ const cartSchema = new Schema(
     },
   }
 );
+  cartSchema.virtual("products", {
+    ref: "Product",
+    localField: "_id",
+    foreignField: "cart",
+    justOne: false,
+  });
 
 const Cart = mongoose.model("Cart", cartSchema);
 module.exports = Cart;

@@ -1,27 +1,27 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const commentSchema = new Schema(
+const reviewSchema = new Schema(
   {
     text: {
       type: String,
-      required: "Comment text is required",
+      required: "Review text is required",
     },
     product: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Product",
-      required: "Comment product is required",
+      required: "Review product is required",
     },
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: "Comment author is required",
+      required: "Review author is required",
     },
     rating: {
       type: Number,
-      min: 1,
+      min: 0,
       max: 5,
-      required: "Product rating is required",
+      required: "Review rating is required",
     }
   },
   {
@@ -40,5 +40,5 @@ const commentSchema = new Schema(
 
 
 
-const Comment = mongoose.model("Comment", commentSchema);
-module.exports = Comment;
+const Review = mongoose.model("Review", reviewSchema);
+module.exports = Review;

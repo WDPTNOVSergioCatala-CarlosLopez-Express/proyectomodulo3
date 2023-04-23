@@ -1,13 +1,14 @@
 const Product = require("../models/product.model");
-const Comments = require("../models/comment.model");
+const Review = require("../models/review.model");
 
-module.exports.list = (req, res) => {
+module.exports.list = (req, res, next) => {
   Product.find()
-    .then((products) => res.json(products))
-    .catch((err) => res.status(400).json("Error: " + err));
+    .populate("reviews")
+    .then((products) => res.status(200).json(products))
+    .catch(next);
 };
 
-module.exports.create = (req, res) => {
+module.exports.create = (req, res, next) => {
   const name = req.body.name;
   const price = req.body.price;
   const description = req.body.description;
@@ -27,18 +28,18 @@ module.exports.create = (req, res) => {
   });
   newProduct
     .save()
-    .then(() => res.json("Product added!"))
-    .catch((err) => res.status(400).json("Error: " + err));
+    .then(() => res.status(201).json("Product added!"))
+    .catch(next);
 };
 
-module.exports.detail = (req, res) => {
+module.exports.detail = (req, res, next) => {
   Product.findById(req.params.id)
-    .populate('comments')
-    .then((product) => res.json(product))
-    .catch((err) => res.status(400).json("Error: " + err));
+    .populate("reviews")
+    .then((product) => res.status(200).json(product))
+    .catch(next);
 };
 
-module.exports.update = (req, res) => {
+module.exports.update = (req, res, next) => {
   Product.findById(req.params.id)
     .then((product) => {
       product.name = req.body.name;
@@ -50,18 +51,18 @@ module.exports.update = (req, res) => {
       product.images = req.body.images;
       product
         .save()
-        .then(() => res.json("Product updated!"))
-        .catch((err) => res.status(400).json("Error: " + err));
+        .then(() => res.status(200).json("Product updated!"))
+        .catch(next);
     })
-    .catch((err) => res.status(400).json("Error: " + err));
+    .catch(next);
 };
 
 module.exports.delete = (req, res, next) => {
   Product.deleteOne({ _id: req.params.id })
     .then(() => {
-      return Comments.deleteMany({ product: req.params.id }).then(() =>
-        res.status(204).json("Product and related comments deleted.")
+      return Review.deleteMany({ product: req.params.id }).then(() =>
+        res.status(204).json("Product and related reviews deleted.")
       );
     })
-    .catch((err) => res.status(400).json("Error: " + err));
+    .catch(next);
 };

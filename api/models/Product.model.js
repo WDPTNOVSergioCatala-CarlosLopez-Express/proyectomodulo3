@@ -54,8 +54,8 @@ const productSchema = new Schema({
   },
 });
 
-productSchema.virtual("comments", {
-  ref: "Comment",
+productSchema.virtual("reviews", {
+  ref: "Review",
   localField: "_id",
   foreignField: "product",
   justOne: false,

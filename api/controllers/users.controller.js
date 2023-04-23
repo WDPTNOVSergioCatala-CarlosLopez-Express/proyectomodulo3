@@ -2,6 +2,7 @@ const User = require('../models/user.model');
 const createError = require("http-errors");
 const mailer = require("../config/mailer.config");
 const jwt = require("jsonwebtoken");
+const Cart = require('../models/cart.model');
 
 module.exports.list = (req, res, next) => {
   User.find()
@@ -81,8 +82,9 @@ module.exports.register = (req, res, next) => {
     
     User.create(req.body)
     .then((user) => {
-        //mailer.sendValidationEmail(user.email, user.name, user.confirmationCode);
-        res.status(201).json(user);
+        return Cart
+          .create({ owner : user.id })
+          .then(cart => res.status(201).json(user))//mailer.sendValidationEmail(user.email, user.name, user.confirmationCode);
     })
     .catch((error) => next(error));
 }
