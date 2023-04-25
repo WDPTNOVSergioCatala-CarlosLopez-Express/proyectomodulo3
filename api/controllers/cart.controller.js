@@ -1,63 +1,83 @@
+const createError = require("http-errors");
 const Cart = require("../models/cart.model");
 
 module.exports.list = (req, res, next) => {
   Cart.find()
-    .then((cart) => res.json(cart))
+    .then((cart) => {
+      if (cart.length === 0) {
+        throw createError(404, "No carts found");
+      }
+      res.status(200).json(cart);
+    })
     .catch(next);
 };
 
+function removeCartItem(cart, productIndex) {
+  const item = cart.items[productIndex];
+  if (item.quantity <= 0) {
+    cart.items.splice(productIndex, 1);
+  }
+}
+
 module.exports.update = (req, res, next) => {
+  const owner = req.user._id.toString();
+  const productId = req.params.productId;
+  const quantity = parseInt(req.params.quantity);
 
-    const owner = req.user._id.toString();
-    const productId = req.params.productId;
-    const quantity = parseInt(req.params.quantity);
-  
-    if (isNaN(quantity) || quantity <= 0) {
-      return next(createError(400, "Invalid quantity"));
-    }
-  
-    Cart.findOne({ owner })
-      .then((cart) => {
-        if (!cart) {
-          return Cart.create({
-            owner: owner,
-            products: [{ product: productId, quantity: quantity }],
-          })
-            .then(() => res.status(201).json())
-            .catch((error) => next(error));
-        }
-        if (!cart.products) {
-            cart.products = [];
-          }
-        const productIndex = cart.products.findIndex(
-          (p) => p.product == productId
-        );
-  
-        if (productIndex == -1) {
-          cart.products.push({ product: productId, quantity: quantity });
-        } else {
-          cart.products[productIndex].quantity += quantity;
-        }
-  
-        return cart
-          .save()
-          .then(() => res.status(202).json())
+  if (isNaN(quantity)) {
+    return next(createError(400, "Invalid quantity"));
+  }
+
+  Cart.findOne({ owner })
+    .populate("items.product")
+    .then((cart) => {
+      if (!cart) {
+        return Cart.create({
+          owner: owner,
+          items: [{ product: productId, quantity: quantity }],
+        })
+          .then((cart) => res.status(201).json(cart))
           .catch(next);
-      })
-      .catch(next);
-  };
+      }
 
+      let item = cart.items.find((item) => item.product._id.toString() === productId);
 
+      if (!item && quantity <= 0) {
+        return res.status(204).json();
+      }
 
-module.exports.remove = (req, res, next) => {
-    const userId = req.user.id;
-
-    Cart.findOneAndUpdate({ owner: userId }, { products: [] })
-      .then((cart) => {
-        if (!cart) {
-          throw createError(404, 'Cart not found');
+      if (!item) {
+        item = { product: productId, quantity: quantity };
+        cart.items.push(item);
+      } else {
+        const newQuantity = item.quantity + quantity;
+        if (newQuantity === 0) {
+          cart.items = cart.items.filter((i) => i.product._id.toString() !== productId);
+        } else if (newQuantity < 0) {
+          throw createError(400, "Invalid quantity");
+        } else {
+          item.quantity = newQuantity;
         }
-        res.status(204).json();
-      })
-      .catch((error) => next(error));
+      }
+
+      return cart.save().then((cart) => res.status(200).json(cart));
+    })
+    .catch(next);
+};
+
+
+module.exports.empty = async (req, res, next) => {
+  try {
+    const cart = await Cart.findOneAndUpdate(
+      { owner: req.user.id },
+      { $set: { items: [] } },
+      { new: true }
+    ).populate("items.product", "-cart");
+
+    res.status(200).json(cart);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error emptying cart" });
+  }
+
 };

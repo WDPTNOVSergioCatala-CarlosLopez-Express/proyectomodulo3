@@ -1,15 +1,20 @@
 import "./App.css";
 import React from "react";
-import Navbar from "./components/navbar/navbar";
-import Header from "./components/header/header";
-import Footer from "./components/footer/footer";
+
+
+import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import ProductItem from "./components/Products/ProductItem";
 
 function App() {
   return (
     <>
-    <Header />
     <Navbar />
+    <Sidebar/>
+    <ProductItem/>
     <Footer />
+    
     </>
   );
 }

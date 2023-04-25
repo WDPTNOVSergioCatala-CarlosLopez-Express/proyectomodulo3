@@ -31,14 +31,12 @@ router.delete("/products/:id/review/:reviewId", secure.auth, productsMid.exists,
 //populate, localstorage
 router.get("/cart", cart.list);
 router.patch("/cart/:productId/:quantity",secure.auth, cart.update);
-router.post("/cart/:id/remove", cart.remove);
+router.post("/cart/empty",secure.auth, cart.empty);
 
-router.get("/orders", orders.list);
-router.post("/orders", orders.create);
-router.get("/orders/:id", orders.detail);
-router.patch("/orders/:id", orders.update);
-router.delete("/orders/:id", orders.delete);
-
-
+router.get("/orders",secure.auth, orders.list);
+router.post("/orders",secure.auth, orders.create);
+router.get("/orders/:id",secure.auth, orders.detail);
+router.patch("/orders/:id",secure.auth, orders.update);
+router.delete("/orders/:id",secure.auth, orders.delete);
 
 module.exports = router;
