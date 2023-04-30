@@ -2,7 +2,13 @@ const Product = require("../models/product.model");
 const Review = require("../models/review.model");
 
 module.exports.list = (req, res, next) => {
-  Product.find()
+  const { category } = req.query
+
+  const criterial = {}
+  if (category && category.trim() !== "") {
+    criterial.category = category;
+  }
+  Product.find(criterial)
     .populate("reviews")
     .then((products) => res.status(200).json(products))
     .catch(next);
@@ -35,6 +41,7 @@ module.exports.create = (req, res, next) => {
 module.exports.detail = (req, res, next) => {
   Product.findById(req.params.id)
     .populate("reviews")
+    .populate("author")
     .then((product) => res.status(200).json(product))
     .catch(next);
 };
@@ -65,4 +72,16 @@ module.exports.delete = (req, res, next) => {
       );
     })
     .catch(next);
+};
+
+module.exports.listCategories = (req, res, next) => {
+  Product.distinct('category')
+    .then((categories) => res.json(categories))
+    .catch((error) => next(error));
+};
+
+module.exports.listSubcategories = (req, res, next) => {
+  Product.distinct('subcategory')
+    .then((subcategories) => res.json(subcategories))
+    .catch((error) => next(error));
 };

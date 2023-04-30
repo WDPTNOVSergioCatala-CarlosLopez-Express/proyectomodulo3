@@ -1,12 +1,6 @@
 import http from './base-api';
 
-const list = (query) => http.get('/products', { params: query })
-  .then((res) => res.data);
-
-const detail = (id) => http.get(`/products/${id}`)
-  .then((res) => res.data);
-
-const create = (product) => http.post('/products', product)
+const add = (id, amount) => http.patch(`/cart/${id}/${amount}`)
   .then((res) => res.data);
 
 const update = (id) => http.patch(`/products/${id}`)
@@ -19,9 +13,7 @@ const listCategories = () => http.get('/categories')
   .then((res) => res.data)
 
  const products = {
-  list,
-  detail,
-  create,
+  add,
   update,
   remove,
   listCategories

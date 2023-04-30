@@ -24,6 +24,9 @@ router.post("/products", products.create);
 router.get("/products/:id", products.detail);
 router.patch("/products/:id", products.update);
 router.delete("/products/:id", products.delete);
+router.get("/categories", products.listCategories)
+router.get("/subcategories", products.listSubcategories)
+
 
 router.post("/products/:id/review", secure.auth, productsMid.exists, reviews.create);
 router.delete("/products/:id/review/:reviewId", secure.auth, productsMid.exists,reviewsMid.exists, reviewsMid.checkAuthor, reviews.delete);

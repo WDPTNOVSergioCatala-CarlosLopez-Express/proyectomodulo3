@@ -9,7 +9,8 @@ const createError = require("http-errors");
 require('./config/db.config')
 const app = express();
 
-
+const cors = require("./config/cors.config");
+app.use(cors);
 app.use(logger("dev"));
 app.use(express.json());
 
