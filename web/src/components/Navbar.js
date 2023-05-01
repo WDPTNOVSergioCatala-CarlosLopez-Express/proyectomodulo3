@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import productsService from '../services/products'
+import { AuthContext } from '../contexts/AuthStore';
 
 function Navbar() {
   const [categories, setCategories] = useState([])
+  const { user } = useContext(AuthContext);
+  console.log(user)
 
   useEffect(() => {   
     productsService.listCategories()
@@ -15,7 +18,7 @@ function Navbar() {
     
 <nav className="bg-slate-950 border-gray-200  rounded-lg shadow">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <Link to="https://flowbite.com/" className="flex items-center">
+        <Link to="/" className="flex items-center">
           <img src="https://res.cloudinary.com/diytgodwa/image/upload/v1682450056/ecommerceapp/Assets/HardMartX_Logo_BIG_TRNSP_LTL_i0njgk.png" className="h-12 mr-8" alt="Flowbite Logo" />
          
         </Link>
@@ -27,8 +30,8 @@ function Navbar() {
       {/* <!-- Dropdown menu --> */}
       <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow  " id="user-dropdown">
         <div className="px-4 py-3">
-          <span className="block text-sm text-gray-900 ">Bonnie Green</span>
-          <span className="block text-sm  text-gray-500 truncate ">name@flowbite.com</span>
+          <span className="block text-sm text-gray-900 "></span>
+          <span className="block text-sm  text-gray-500 truncate "></span>
         </div>
         <ul className="py-2" aria-labelledby="user-menu-button">
           <li>
@@ -62,7 +65,7 @@ function Navbar() {
           </form>
     <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white ">
       <li>
-        <Link to="#" className="block py-2 pl-3 ml-4 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 " aria-current="page">Home</Link>
+        <Link to="/" className="block py-2 pl-3 ml-4 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 " aria-current="page">Home</Link>
       </li>
       <li>
           <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto">Categories <svg className="w-5 h-5 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path></svg></button>
@@ -70,8 +73,8 @@ function Navbar() {
             <div id="dropdownNavbar" className="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 ">
                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
                   {categories.sort().map((category) => (
-                    <li>
-                    <Link to={`/components?category=${category}`} className="block px-4 py-2 capitalize hover:bg-gray-100 ">{category}</Link>
+                    <li key={category}>
+                    <Link key={category} to={`/components?category=${category}`} className="block px-4 py-2 capitalize hover:bg-gray-100 ">{category}</Link>
                   </li>
                   ))}
                   

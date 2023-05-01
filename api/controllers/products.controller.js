@@ -40,8 +40,8 @@ module.exports.create = (req, res, next) => {
 
 module.exports.detail = (req, res, next) => {
   Product.findById(req.params.id)
-    .populate("reviews")
-    .populate("author")
+    
+    .populate({path: 'reviews', populate:'author'})
     .then((product) => res.status(200).json(product))
     .catch(next);
 };
