@@ -57,13 +57,13 @@ function Navbar() {
     </button>
   </div>
   <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
-  <form action="#" method="POST" className="relative mt-3 mr-24">
+  <form action="#" method="POST" className="relative mt-0 mr-24">
             <input type="text" className="bg-gray-100 rounded-full w-80 px-4 py-2 pr-8 text-sm leading-tight focus:outline-none focus:bg-white focus:border-gray-300" placeholder="Search..." />
             <button type="submit" className="absolute right-0 top-0 mt-3 mr-4">
             <i className="fa fa-search" aria-hidden="true"></i>
             </button>
           </form>
-    <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white ">
+    <ul className="flex flex-col font-medium p-4 md:p-0 mt-10 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white ">
       <li>
         <Link to="/" className="block py-2 pl-3 ml-4 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 " aria-current="page">Home</Link>
       </li>

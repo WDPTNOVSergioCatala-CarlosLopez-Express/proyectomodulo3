@@ -14,7 +14,7 @@ function LoginPage() {
             <img
               src="https://res.cloudinary.com/diytgodwa/image/upload/v1682450056/ecommerceapp/Assets/HardMartX_Logo_BIG_TRNSP_LTL_i0njgk.png"
               alt="Hardmartx"
-              className="h-32 md:h-auto mx-auto"
+              className="bg-slate-950 rounded h-32 md:h-auto mx-auto p-5"
               style={{ maxHeight: "130px" }}
             />
           </div>

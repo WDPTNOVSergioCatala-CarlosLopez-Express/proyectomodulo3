@@ -44,7 +44,7 @@ function UserForm() {
             </span>
             <input
               type="text"
-              className={`form-control ${errors.name ? "is-invalid" : ""}`}
+              className={`form-control border-2 rounded-md w-full pl-10 py-2 ${errors.name ? "is-invalid" : ""}`}
               placeholder="Name"
               {...register("name", {
                 required: "User name is required",
@@ -64,7 +64,7 @@ function UserForm() {
             </span>
             <input
               type="text"
-              className={`form-control ${errors.surname ? "is-invalid" : ""}`}
+              className={`form-control border-2 rounded-md w-full pl-10 py-2 ${errors.surname ? "is-invalid" : ""}`}
               placeholder="Surname"
               {...register("surname", {
                 required: "User surname is required",
@@ -84,7 +84,7 @@ function UserForm() {
             </span>
             <input
               type="text"
-              className={`form-control ${errors.username ? "is-invalid" : ""}`}
+              className={`form-control border-2 rounded-md w-full pl-10 py-2 ${errors.username ? "is-invalid" : ""}`}
               placeholder="johndoe"
               {...register("username", {
                 required: "Username is required",
@@ -108,7 +108,7 @@ function UserForm() {
             </span>
             <input
               type="text"
-              className={`form-control ${errors.email ? "is-invalid" : ""}`}
+              className={`form-control border-2 rounded-md w-full pl-10 py-2 ${errors.email ? "is-invalid" : ""}`}
               placeholder="user@example.org"
               {...register("email", {
                 required: "User email is required",
@@ -132,8 +132,8 @@ function UserForm() {
             </span>
             <input
               type="password"
-              className={`form-control ${errors.password ? "is-invalid" : ""}`}
-              placeholder="****"
+              className={`form-control border-2 rounded-md w-full pl-10 py-2 ${errors.password ? "is-invalid" : ""}`}
+              placeholder="Enter a valid password"
               {...register("password", {
                 required: "User password is required",
                 minLength: {
@@ -156,7 +156,7 @@ function UserForm() {
             </span>
             <input
               type="text"
-              className={`form-control ${errors.address ? "is-invalid" : ""}`}
+              className={`form-control border-2 rounded-md w-full pl-10 py-2 ${errors.address ? "is-invalid" : ""}`}
               placeholder="Address"
               {...register("address", {
                 required: "User address is required",
@@ -177,7 +177,7 @@ function UserForm() {
             <input
               type="text"
               name="profilepic"
-              className={`form-control ${
+              className={`form-control border-2 rounded-md w-full pl-10 py-2 ${
                 errors.profilepic ? "is-invalid" : ""
               }`}
               placeholder="Profile Pic"
@@ -199,8 +199,8 @@ function UserForm() {
           </div>
         )}
 
-        <div className="d-grid mt-2">
-          <button type="submit" className="btn btn-primary">
+        <div className="d-grid mt-2 text-center">
+          <button type="submit" className='bg-slate-950 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
             Register
           </button>
         </div>

@@ -58,8 +58,8 @@ function UsersLogin() {
           {errors.password && <p className='text-red-500 mt-2'>{errors.password?.message}</p>}
         </div>
 
-        <div className="mt-2">
-          <button type="submit" className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Login</button>
+        <div className="d-grid mt-2 text-center">
+          <button type="submit" className='bg-slate-950 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Login</button>
         </div>
       </form>
     </>

@@ -20,17 +20,17 @@ const Carousel = () => {
   }, []);
 
   return (
-    <div className="relative w-screen">
+    <div className="rounded-lg overflow-hidden relative">
       <img
         src={images[currentImage]}
         alt="carousel"
         className="w-full h-auto"
       />
-      <div className="absolute bottom-0 left-0 w-full h-10 bg-black bg-opacity-40 text-center text-white">
+      <div className="absolute bottom-0 left-0 w-full h-10 bg-black bg-opacity-0 text-center text-white">
         {images.map((_, index) => (
           <span
             key={index}
-            className={`inline-block w-3 h-3 mx-2 rounded-full cursor-pointer ${
+            className={`inline-block w-2 h-2 mx-2 rounded-full cursor-pointer ${
               index === currentImage ? "bg-white" : "bg-gray-300"
             }`}
             onClick={() => setCurrentImage(index)}
