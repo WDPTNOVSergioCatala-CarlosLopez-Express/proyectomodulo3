@@ -20,7 +20,7 @@ const Carousel = () => {
   }, []);
 
   return (
-    <div className="rounded-lg overflow-hidden relative">
+    <div className="carousel rounded-lg overflow-hidden relative">
       <img
         src={images[currentImage]}
         alt="carousel"

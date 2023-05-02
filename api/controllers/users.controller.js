@@ -3,6 +3,7 @@ const createError = require("http-errors");
 const mailer = require("../config/mailer.config");
 const jwt = require("jsonwebtoken");
 const Cart = require('../models/cart.model');
+const moment = require('moment')
 
 module.exports.list = (req, res, next) => {
   User.find()
@@ -68,7 +69,7 @@ module.exports.login = (req, res, next) => {
           }
   
           const token = jwt.sign(
-            { sub: user.id, exp: Date.now() / 1000 + 3_600 }, // 1h duration
+            { sub: user.id, exp: moment().add(1, 'days').valueOf() / 1000 }, // 1h duration
             process.env.JWT_SECRET
           );
   

@@ -176,18 +176,18 @@ function UserForm() {
             </span>
             <input
               type="text"
-              name="profilepic"
+              name="profilePic"
               className={`form-control border-2 rounded-md w-full pl-10 py-2 ${
-                errors.profilepic ? "is-invalid" : ""
+                errors.profilePic ? "is-invalid" : ""
               }`}
               placeholder="Profile Pic"
-              {...register("profilepic", {
-                required: "User profilepic is required",
+              {...register("profilePic", {
+                required: "User profilePic is required",
               })}
             />
-            {errors.profilepic && (
+            {errors.profilePic && (
               <div className="invalid-feedback">
-                {errors.profilepic?.message}
+                {errors.profilePic?.message}
               </div>
             )}
           </div>

@@ -1,6 +1,6 @@
 import http from './base-api';
 
-const create = (user) => http.post('/users', user)
+const create = (user) => http.post('/register', user)
   .then((res) => res.data);
 
 const login = (user) => http.post('/login', user)

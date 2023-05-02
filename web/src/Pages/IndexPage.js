@@ -1,4 +1,4 @@
-import Carousel from "../components/Carousel";
+import Carousel from "../components/Carousel/Carousel";
 import ProductGallery from "../components/Products/ProductGallery";
 import React from "react";
 

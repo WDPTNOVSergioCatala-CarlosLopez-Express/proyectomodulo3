@@ -35,6 +35,7 @@ router.delete("/products/:id/review/:reviewId", secure.auth, productsMid.exists,
 router.get("/cart", cart.list);
 router.patch("/cart/:productId/:quantity",secure.auth, cart.update);
 router.post("/cart/empty",secure.auth, cart.empty);
+router.get("/cart/:id",secure.auth, cart.getCart);
 
 router.get("/orders",secure.auth, orders.list);
 router.post("/orders",secure.auth, orders.create);

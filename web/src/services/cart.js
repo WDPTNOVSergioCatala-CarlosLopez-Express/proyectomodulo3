@@ -1,23 +1,19 @@
 import http from './base-api';
 
-const add = (id, amount) => http.patch(`/cart/${id}/${amount}`)
+const list = () => http.get(`/cart`)
   .then((res) => res.data);
 
-const update = (id) => http.patch(`/products/${id}`)
+const update = (productId, quantity) => http.patch(`/products/${productId}/${quantity}`)
   .then((res) => res.data);
 
-const remove = (id) => http.delete(`/products/${id}`)
+const empty = () => http.post(`/cart/empty`)
   .then((res) => res.data);
 
-const listCategories = () => http.get('/categories')
-  .then((res) => res.data)
-
- const products = {
-  add,
+ const cart = {
+  list,
   update,
-  remove,
-  listCategories
-}
+  empty,
+  }
 
 
-export default products
+export default cart

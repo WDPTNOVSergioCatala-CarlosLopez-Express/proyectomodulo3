@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import usersService from '../../../services/user';
@@ -11,6 +11,7 @@ function UsersLogin() {
   const [serverError, setServerError] = useState(undefined);
   const { onUserChange } = useContext(AuthContext); // use the AuthContext from the AuthStore component
 
+  //useEffect contexto
   const onLoginSubmit = async (user) => {
     try {
       setServerError();
@@ -29,6 +30,7 @@ function UsersLogin() {
 
   return (
     <>
+    
       {location?.state?.user?.confirm === false && <div className="alert alert-info">You must active your account before login, please check your inbox</div>}
       <form onSubmit={handleSubmit(onLoginSubmit)}>
         {serverError && <div className="alert alert-danger hidden lg:block">{serverError}</div>}
