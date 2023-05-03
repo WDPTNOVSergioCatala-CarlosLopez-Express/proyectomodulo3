@@ -26,7 +26,7 @@ function ProductGallery() {
     <>
     <div className=' justify-center mx-4 my-4 grid grid-cols-4 gap-6'>
     {products.map((product) => (
-      <ProductItem product= {product}/>
+      <ProductItem product= {product} key={product.id}/>
     ))}
     </div>
     </>

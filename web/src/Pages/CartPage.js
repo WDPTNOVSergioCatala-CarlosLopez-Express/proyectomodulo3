@@ -1,81 +1,142 @@
-import { useContext, useState } from "react";
+
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthStore";
-import { updateCartItem, deleteCartItem } from "./api/cart";
+import { useNavigate } from 'react-router-dom';
+
 import cartService from '../services/cart'
+import orderService from '../services/order'
 
 function Cart() {
   const { user } = useContext(AuthContext);
-  const [updatingItem, setUpdatingItem] = useState(null);
-  const [cart, setCart] = useState(cartService.list);
-
-  const handleUpdateItem = (itemId, quantity) => {
-    setUpdatingItem(itemId);
-    updateCartItem(itemId, quantity).then((updatedItem) => {
-      setCart((prevCart) => {
-        const itemIndex = prevCart.items.findIndex((item) => item._id === itemId);
-        if (itemIndex !== -1) {
-          const newItems = [...prevCart.items];
-          newItems.splice(itemIndex, 1, updatedItem);
-          return { ...prevCart, items: newItems };
+  const [cart, setCart] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  
+  const id = user.id
+  useEffect(() => {
+    async function fetchCart() {
+      try {
+        const cart = await cartService.detail(id);
+        setCart(cart);
+        
+      } catch (error) {
+        console.error(error);
+        const errorStatus = error.response?.status;
+        if (errorStatus === 404) {
+          navigate("/products");
         }
-        return prevCart;
-      });
-      setUpdatingItem(null);
-    });
-  };
+      } finally {
+        setLoading(false);
+      }
+    }
 
-  const handleDeleteItem = (itemId) => {
-    deleteCartItem(itemId).then(() => {
-      setCart((prevCart) => {
-        const newItems = prevCart.items.filter((item) => item._id !== itemId);
-        return { ...prevCart, items: newItems };
-      });
-    });
-  };
+    fetchCart();
+  }, [id, navigate]);
+  
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (!cart) {
+    return <div>Error: Cart not found.</div>;
+  }
+  function getTotalPrice() {
+    let total = 0
+    cart.items.forEach(item => {
+      total += item.product.price * item.quantity
+    })
+    return total
+  }
 
-  const totalPrice = cart.items.reduce((total, item) => total + item.price * item.quantity, 0);
+  function handleCheckout() {
+    const orderItems = cart.items.map(item => {
+      return {
+        product: item.product._id,
+        quantity: item.quantity
+      }
+    });
+    const shippingAddress = {
+      address: "",
+      city: "",
+      postalCode: "",
+      country: ""
+    };
+    const paymentMethod = "PayPal";
+    const totalPrice = getTotalPrice();
+
+    orderService.create({
+      orderNumber: Math.floor(Math.random() * 1000000),
+      orderItems,
+      totalPrice,
+      shippingAddress,
+      paymentMethod
+    })
+      .then(order => {
+        navigate(`/order/${order._id}`);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 
   return (
-    <div>
-      <h1>Shopping Cart</h1>
-      <table>
+    <div class="mx-auto">
+      <h1 class="text-center mb-4 text-3xl font-bold">Shopping Cart</h1>
+      <table class="border-collapse border-2 border-gray-500 mx-auto">
         <thead>
-          <tr>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Actions</th>
+          <tr class="bg-gray-200">
+            <th class="p-2">Product</th>
+            <th class="p-2">Unit Price</th>
+            <th class="p-2">Quantity</th>
+            <th class="p-2">Price</th>
+            <th class="p-2">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {cart.items.map((item) => (
-            <tr key={item._id}>
-              <td>{item.name}</td>
-              <td>{item.price}</td>
-              <td>
-                <button disabled={updatingItem === item._id} onClick={() => handleUpdateItem(item._id, item.quantity - 1)}>
-                  -
-                </button>
-                <span>{item.quantity}</span>
-                <button disabled={updatingItem === item._id} onClick={() => handleUpdateItem(item._id, item.quantity + 1)}>
-                  +
-                </button>
-              </td>
-              <td>
-                <button disabled={updatingItem === item._id} onClick={() => handleDeleteItem(item._id)}>
-                  Remove
-                </button>
-              </td>
-            </tr>
-          ))}
+          {cart.items && cart.items.length > 0 && (
+            cart.items.map((item) => (
+              <tr key={item.product._id}>
+                <td class="p-2">{item.product.name}</td>
+                <td class="p-2">{item.product.price}</td>
+                <td class="p-2">
+                  <button class="bg-blue-500 text-white p-2 rounded hover:bg-blue-700" onClick={async () => {
+                    const updatedCart = await cartService.add(item.product.id, -1);
+                    setCart(updatedCart);
+                  }}>
+                    -
+                  </button>
+                  <span class="mx-2">{item.quantity}</span>
+                  <button class="bg-blue-500 text-white p-2 rounded hover:bg-blue-700" onClick={async () => {
+                    const updatedCart = await cartService.add(item.product.id, +1);
+                    setCart(updatedCart);
+                  }}>
+                    +
+                  </button>
+                </td>
+                <td class="p-2">{(item.product.price * item.quantity).toFixed(2)}€</td>
+                <td class="p-2">
+                  <button class="bg-red-500 text-white p-2 rounded hover:bg-red-700" onClick={async () => {
+                    const updatedCart = await cartService.add(item.product.id, -item.quantity);
+                    setCart(updatedCart);
+                  }}>
+                    Remove
+                  </button>
+                </td>
+              </tr>
+            ))
+          )}
+          {!cart.items && cart.items.length === 0 && (
+            <div>Cart is empty</div>
+          )}
         </tbody>
         <tfoot>
-          <tr>
-            <td colSpan="3">Total:</td>
-            <td>{totalPrice}</td>
+          <tr class="bg-gray-200">
+            <td class="p-2" colSpan="3">Total: {getTotalPrice().toFixed(2)} €</td>
           </tr>
         </tfoot>
       </table>
+      <button class="bg-blue-500 text-white p-2 rounded hover:bg-blue-700 mt-2" onClick={handleCheckout}>
+        Checkout
+      </button>
     </div>
   );
 }

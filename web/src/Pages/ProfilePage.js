@@ -8,7 +8,7 @@ function ProfilePage() {
 
 
   const onSubmit = (data) => {
-    console.log(data);
+    
     reset();
   };
   return (

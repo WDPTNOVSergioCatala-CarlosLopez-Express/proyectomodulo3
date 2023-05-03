@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import productsService from "../services/products";
 import { AuthContext } from "../contexts/AuthStore";
 import * as FaAi from "react-icons/ai";
@@ -7,7 +7,7 @@ import * as FaAi from "react-icons/ai";
 function Navbar() {
   const [categories, setCategories] = useState([]);
   const { user, logout } = useContext(AuthContext);
-  console.log(user);
+
 
   useEffect(() => {
     productsService
@@ -212,7 +212,9 @@ function Navbar() {
           </ul>
         </div>
         <div className="z-50">
+          <NavLink to='/cart'>
         <FaAi.AiOutlineShoppingCart fill="white" size={40} />
+        </NavLink>
         </div>
       </div>
       <div>

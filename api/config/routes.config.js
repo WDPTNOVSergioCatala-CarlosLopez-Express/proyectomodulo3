@@ -32,10 +32,11 @@ router.post("/products/:id/review", secure.auth, productsMid.exists, reviews.cre
 router.delete("/products/:id/review/:reviewId", secure.auth, productsMid.exists,reviewsMid.exists, reviewsMid.checkAuthor, reviews.delete);
 
 //populate, localstorage
+router.get("/cart/:id",secure.auth, cart.getCart);
 router.get("/cart", cart.list);
 router.patch("/cart/:productId/:quantity",secure.auth, cart.update);
 router.post("/cart/empty",secure.auth, cart.empty);
-router.get("/cart/:id",secure.auth, cart.getCart);
+
 
 router.get("/orders",secure.auth, orders.list);
 router.post("/orders",secure.auth, orders.create);

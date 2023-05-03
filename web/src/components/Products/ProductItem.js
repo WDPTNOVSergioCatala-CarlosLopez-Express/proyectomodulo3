@@ -26,6 +26,7 @@ function ProductItem({ product }) {
       progress: undefined,
       theme: "light",
     });
+    
     cartService.add(ev.target.id.value, 1);
   };
   return (

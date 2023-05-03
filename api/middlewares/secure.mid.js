@@ -34,7 +34,7 @@ module.exports.auth = (req, res, next) => {
       req.user.id = req.user._id.toString();
       delete req.user._id;
 
-      console.log(req.user); // aquí se muestra la respuesta modificada
+       // aquí se muestra la respuesta modificada
 
       next();
     } else {

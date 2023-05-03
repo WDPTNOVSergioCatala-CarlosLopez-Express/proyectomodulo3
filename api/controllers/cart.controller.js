@@ -20,8 +20,8 @@ function removeCartItem(cart, productIndex) {
 }
 
 module.exports.getCart = (req, res, next) => {
-  const owner = req.user.id;
-  console.log(req.user.id)
+  const owner = req.params.id;
+  
 
   Cart.findOne({ owner })
     .populate("items.product")

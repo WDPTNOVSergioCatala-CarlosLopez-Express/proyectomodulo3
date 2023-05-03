@@ -17,7 +17,7 @@ const ProductPage = () => {
       try {
         const product = await productService.detail(id);
         setProduct(product);
-        console.log(product);
+        
       } catch (error) {
         console.error(error);
         const errorStatus = error.response?.status;
