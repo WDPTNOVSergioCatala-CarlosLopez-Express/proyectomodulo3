@@ -10,16 +10,16 @@ function Footer() {
     </span>
     <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-inherit  sm:mt-0">
         <li>
-            <Link to="#" className="text-white mr-4 hover:underline md:mr-6 ">About</Link>
+            <Link to="/about" className="text-white mr-4 hover:underline md:mr-6 ">About</Link>
         </li>
         <li>
-            <Link to="#" className="text-white mr-4 hover:underline md:mr-6">Privacy Policy</Link>
+            <Link to="/privacy" className="text-white mr-4 hover:underline md:mr-6">Privacy Policy</Link>
         </li>
         <li>
-            <Link to="#" className="text-white mr-4 hover:underline md:mr-6">Licensing</Link>
+            <Link to="/licensing" className="text-white mr-4 hover:underline md:mr-6">Licensing</Link>
         </li>
         <li>
-            <Link to="#" className="text-white hover:underline">Contact</Link>
+            <Link to="/contact" className="text-white hover:underline">Contact</Link>
         </li>
     </ul>
     </div>

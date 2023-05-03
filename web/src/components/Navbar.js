@@ -8,7 +8,6 @@ function Navbar() {
   const [categories, setCategories] = useState([]);
   const { user, logout } = useContext(AuthContext);
 
-
   useEffect(() => {
     productsService
       .listCategories()
@@ -17,17 +16,17 @@ function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-slate-950 border-gray-200  rounded-lg shadow">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <nav className="bg-slate-950 border-gray-200  rounded-lg shadow h-16">
+      <div className="flex items-center flex-grow justify-left">
         <Link to="/" className="flex items-center">
           <img
             src="https://res.cloudinary.com/diytgodwa/image/upload/v1682450056/ecommerceapp/Assets/HardMartX_Logo_BIG_TRNSP_LTL_i0njgk.png"
-            className="h-12 mr-8"
+            className="h-12 mt-2 ml-24 mr-8"
             alt="ecommerce"
           />
         </Link>
         {user?.email && (
-          <div className="flex items-center md:order-2">
+          <div className="flex items-center flex-grow justify-end mr-5">
             <button
               type="button"
               className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 "
@@ -115,22 +114,11 @@ function Navbar() {
             </button>
           </div>
         )}
-        
         <div
-          className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+          className="flex items-center flex-grow justify-center mt-1 ml-48 pl-10"
           id="mobile-menu-2"
         >
-          <form action="#" method="POST" className="relative mt-0 mr-24">
-            <input
-              type="text"
-              className="bg-gray-100 rounded-full w-80 px-4 py-2 pr-8 text-sm leading-tight focus:outline-none focus:bg-white focus:border-gray-300"
-              placeholder="Search..."
-            />
-            <button type="submit" className="absolute right-0 top-0 mt-3 mr-4">
-              <i className="fa fa-search" aria-hidden="true"></i>
-            </button>
-          </form>
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-10 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white ">
+          <ul className="flex mt-12 font-medium  md:p-0 mt-10 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white ">
             <li>
               <Link
                 to="/"
@@ -186,7 +174,7 @@ function Navbar() {
             </li>
             <li>
               <Link
-                to="#"
+                to="/about"
                 className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 "
               >
                 About
@@ -194,7 +182,7 @@ function Navbar() {
             </li>
             <li>
               <Link
-                to="#"
+                to="/services"
                 className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 "
               >
                 Services
@@ -203,7 +191,7 @@ function Navbar() {
 
             <li>
               <Link
-                to="#"
+                to="/contact"
                 className="block py-2 pl-3 mr-4 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 "
               >
                 Contact
@@ -211,15 +199,13 @@ function Navbar() {
             </li>
           </ul>
         </div>
-        <div className="z-50">
-          <NavLink to='/cart'>
-        <FaAi.AiOutlineShoppingCart fill="white" size={40} />
-        </NavLink>
+        <div className="flex items-center flex-grow justify-end mr-5">
+          <NavLink to="/cart">
+            <FaAi.AiOutlineShoppingCart fill="white" size={40} />
+          </NavLink>
         </div>
       </div>
-      <div>
-        
-      </div>
+      <div></div>
     </nav>
   );
 }
