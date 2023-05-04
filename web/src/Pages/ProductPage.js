@@ -17,7 +17,6 @@ const ProductPage = () => {
       try {
         const product = await productService.detail(id);
         setProduct(product);
-        
       } catch (error) {
         console.error(error);
         const errorStatus = error.response?.status;
@@ -33,10 +32,18 @@ const ProductPage = () => {
   }, [id, navigate]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+      </div>
+    );
   }
   if (!product) {
-    return <div>Error: Product not found.</div>;
+    return (
+      <div className="text-center mt-10 text-gray-900 text-2xl">
+        Error: Product not found.
+      </div>
+    );
   }
 
   const handleSubmit = (ev) => {
@@ -53,7 +60,8 @@ const ProductPage = () => {
     });
     cartService.add(ev.target.id.value, 1);
   };
-   return (
+
+  return (
     <div className="container mx-auto py-10">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         <div className="flex justify-center items-center">
@@ -71,19 +79,19 @@ const ProductPage = () => {
               {product.price.toFixed(2)}€
             </span>
             <form onSubmit={handleSubmit}>
-            <input
-              name="id"
-              type="text"
-              defaultValue={product.id}
-              className="hidden"
-            />
-            <button
-              type="submit"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-3"
-            >
-              Add to cart
-            </button>
-          </form>
+              <input
+                name="id"
+                type="text"
+                defaultValue={product.id}
+                className="hidden"
+              />
+              <button
+                type="submit"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-3"
+              >
+                Add to cart
+              </button>
+            </form>
             {product.stock > 0 ? (
               <span className="ml-2 bg-green-500 text-white py-1 px-2 rounded-full">
                 In stock
@@ -131,7 +139,7 @@ const ProductPage = () => {
             ))}
           </div>
         ) : (
-          <p>No reviews yet.</p>
+          <p className="text-gray-700">No reviews yet.</p>
         )}
       </div>
       <ToastContainer

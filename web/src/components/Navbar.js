@@ -162,7 +162,7 @@ function Navbar() {
                     <li key={category}>
                       <Link
                         key={category}
-                        to={`/components?category=${category}`}
+                        to={`/products?category=${category}`}
                         className="block px-4 py-2 capitalize hover:bg-gray-100 "
                       >
                         {category}

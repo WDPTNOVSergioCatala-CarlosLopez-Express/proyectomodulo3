@@ -12,13 +12,16 @@ function ContactPage() {
         <div className="w-1/2 mr-2">
           <h2 className="text-2xl font-bold mb-2">Email Us</h2>
           <p className="text-lg mb-2">
-            Email us at <a href="mailto:contact@hardmartx.com">contact@hardmartx.com</a> and we'll get back to you within 24 hours.
+            Email us at{" "}
+            <a href="mailto:contact@hardmartx.com">contact@hardmartx.com</a> and
+            we'll get back to you within 24 hours.
           </p>
         </div>
         <div className="w-1/2 ml-2">
           <h2 className="text-2xl font-bold mb-2">Call Us</h2>
           <p className="text-lg mb-2">
-            Call us at <a href="tel:+1234567890">+123-456-7890</a> between 9am and 5pm EST, Monday through Friday.
+            Call us at <a href="tel:+1234567890">+123-456-7890</a> between 9am
+            and 5pm EST, Monday through Friday.
           </p>
         </div>
       </div>
@@ -26,7 +29,7 @@ function ContactPage() {
         <div className="w-1/2 mr-2">
           <h2 className="text-2xl font-bold mb-2">Visit Us</h2>
           <p className="text-lg mb-2">
-            Come visit us at our headquarters at 123 Main St, Anytown USA.
+            Come visit us at our headquarters at PATATA ST, Port 3500 Anytown IRONHACK.
           </p>
         </div>
         <div className="w-1/2 ml-2">

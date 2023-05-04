@@ -2,8 +2,7 @@ import React from "react";
 import UsersLogin from "../components/users/users-login/UsersLogin";
 import PageLayout from "../components/layout/PageLayout";
 import { Link } from "react-router-dom";
-import AuthStore from "../contexts/AuthStore"
-
+import AuthStore from "../contexts/AuthStore";
 
 function LoginPage() {
   return (

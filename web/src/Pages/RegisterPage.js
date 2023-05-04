@@ -1,7 +1,7 @@
 import React from "react";
 import PageLayout from "../components/layout/PageLayout";
 import { Link } from "react-router-dom";
-import AuthStore from "../contexts/AuthStore"
+import AuthStore from "../contexts/AuthStore";
 import UserForm from "../components/users/users-form/users-form";
 
 function Register() {
