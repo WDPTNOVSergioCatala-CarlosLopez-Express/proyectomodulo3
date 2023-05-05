@@ -1,8 +1,23 @@
 import React from "react";
 
 function AboutPage() {
+  const bgImageUrl = "https://res.cloudinary.com/diytgodwa/image/upload/v1683304522/ecommerceapp/Walls%20for%20pages/pexels-ron-lach-7858745_ta7ldi.jpg"; // replace with your background image URL
+
   return (
-    <div className="p-10 text-white bg-slate-950 rounded-lg ml-4 mr-4">
+    <div
+      className="p-10 text-white rounded-lg ml-4 mr-4"
+      style={{
+        backgroundImage: `url(${bgImageUrl})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+        textAlign: "center",
+      }}
+    >
       <h1 className="text-4xl font-bold mb-4">About HardMartX</h1>
       <p className="text-lg mb-4">
         HardMartX is a tech ecommerce that specializes in PC components and
