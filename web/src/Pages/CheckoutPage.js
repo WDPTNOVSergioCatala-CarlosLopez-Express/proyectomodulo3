@@ -1,10 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 function CheckoutPage() {
   return (
-    <div className="container mx-auto p-10 text-white bg-slate-950 rounded-lg">
+    <motion.div
+      className="container mx-auto p-10 text-white bg-slate-950 rounded-lg"
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.25 } }}
+    >
       <div className="flex items-center mb-8">
         <img
           src="https://res.cloudinary.com/diytgodwa/image/upload/v1682450056/ecommerceapp/Assets/HardMartX_Logo_BIG_TRNSP_LTL_i0njgk.png"
@@ -121,7 +127,7 @@ function CheckoutPage() {
           Continue shopping
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

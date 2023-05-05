@@ -1,10 +1,12 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 function PrivacyPage() {
-  const bgImageUrl = "https://res.cloudinary.com/diytgodwa/image/upload/v1683304522/ecommerceapp/Walls%20for%20pages/pexels-ron-lach-7858745_ta7ldi.jpg"; // replace with your background image URL
+  const bgImageUrl =
+    "https://res.cloudinary.com/diytgodwa/image/upload/v1683323003/ecommerceapp/Walls%20for%20pages/pexels-pixabay-164425_lsuxcv.jpg";
 
   return (
-    <div
+    <motion.div
       className="p-10 text-white rounded-lg ml-4 mr-4"
       style={{
         backgroundImage: `url(${bgImageUrl})`,
@@ -17,6 +19,9 @@ function PrivacyPage() {
         minHeight: "100vh",
         textAlign: "center",
       }}
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.25 } }}
     >
       <h1 className="text-4xl font-bold mb-4">Privacy Policy</h1>
       <p className="text-lg mb-4">
@@ -63,7 +68,7 @@ function PrivacyPage() {
         We encourage you to review this Privacy Policy periodically to stay
         informed about how we are protecting your information.
       </p>
-    </div>
+    </motion.div>
   );
 }
 

@@ -184,7 +184,13 @@ function Navbar() {
                   to="/register"
                   className="text-sm text-gray-300 hover:text-white mx-4"
                 >
-                  Login/Register
+                  Register
+                </Link>
+                <Link
+                  to="/login"
+                  className="text-sm text-gray-300 hover:text-white mx-4"
+                >
+                  Login
                 </Link>
               </div>
             )}

@@ -5,6 +5,7 @@ import cartService from "../services/cart";
 import productService from "../services/products";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { motion } from "framer-motion";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -62,7 +63,12 @@ const ProductPage = () => {
   };
 
   return (
-    <div className="container mx-auto py-10">
+    <motion.div
+      className="container mx-auto py-10"
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.25 } }}
+    >
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         <div className="flex justify-center items-center">
           <img
@@ -154,7 +160,7 @@ const ProductPage = () => {
         pauseOnHover
         theme="light"
       />
-    </div>
+    </motion.div>
   );
 };
 

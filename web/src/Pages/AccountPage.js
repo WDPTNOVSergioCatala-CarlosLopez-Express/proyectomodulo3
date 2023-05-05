@@ -6,6 +6,7 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import userService from "../services/user";
 import orderService from "../services/order";
+import { motion } from "framer-motion";
 
 function AccountPage() {
   const { user, setUser } = useContext(AuthContext);
@@ -70,7 +71,12 @@ function AccountPage() {
   }
 
   return (
-    <div className="mx-auto bg-gray-100 p-4 rounded-md">
+    <motion.div
+      className="mx-auto bg-gray-100 p-4 rounded-md"
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.25 } }}
+    >
       <h1 className="text-center mb-4 text-3xl font-bold">My Account</h1>
       <table className="border-collapse border-2 border-gray-500 mx-auto">
         <thead>
@@ -173,7 +179,7 @@ function AccountPage() {
           )}
         </tbody>
       </table>
-    </div>
+    </motion.div>
   );
 }
 

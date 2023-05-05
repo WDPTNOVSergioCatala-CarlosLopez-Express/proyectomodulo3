@@ -2,9 +2,9 @@ import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthStore";
 import { useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
-
 import cartService from "../services/cart";
 import orderService from "../services/order";
+import { motion } from "framer-motion";
 
 function Cart() {
   const { user } = useContext(AuthContext);
@@ -79,7 +79,12 @@ function Cart() {
   }
 
   return (
-    <div className="mx-auto bg-slate-950 p-10 text-white rounded-lg">
+    <motion.div
+      className="mx-auto bg-slate-950 p-10 text-white rounded-lg"
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.25 } }}
+    >
       <img
         src="https://res.cloudinary.com/diytgodwa/image/upload/v1682450056/ecommerceapp/Assets/HardMartX_Logo_BIG_TRNSP_LTL_i0njgk.png"
         alt="HardMartX Logo"
@@ -175,7 +180,7 @@ function Cart() {
           </tr>
         </tfoot>
       </table>
-    </div>
+    </motion.div>
   );
 }
 

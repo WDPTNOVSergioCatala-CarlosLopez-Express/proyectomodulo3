@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../contexts/AuthStore";
+import { motion } from "framer-motion";
 
 function ProfilePage() {
   const { user } = useContext(AuthContext);
@@ -15,7 +16,12 @@ function ProfilePage() {
     reset();
   };
   return (
-    <div className="flex justify-center border border-gray-300 rounded-lg p-4">
+    <motion.div
+      className="flex justify-center border border-gray-300 rounded-lg p-4"
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.25 } }}
+    >
       <div className="max-w-xs">
         <form onSubmit={handleSubmit(onSubmit)}>
           <img
@@ -93,7 +99,7 @@ function ProfilePage() {
           </div>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

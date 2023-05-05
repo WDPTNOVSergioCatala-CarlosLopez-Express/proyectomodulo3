@@ -1,10 +1,12 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 function AboutPage() {
-  const bgImageUrl = "https://res.cloudinary.com/diytgodwa/image/upload/v1683304522/ecommerceapp/Walls%20for%20pages/pexels-ron-lach-7858745_ta7ldi.jpg"; // replace with your background image URL
+  const bgImageUrl =
+    "https://res.cloudinary.com/diytgodwa/image/upload/v1683322946/ecommerceapp/Walls%20for%20pages/pexels-veeterzy-303383_wqds7v.jpg";
 
   return (
-    <div
+    <motion.div
       className="p-10 text-white rounded-lg ml-4 mr-4"
       style={{
         backgroundImage: `url(${bgImageUrl})`,
@@ -17,6 +19,9 @@ function AboutPage() {
         minHeight: "100vh",
         textAlign: "center",
       }}
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.25 } }}
     >
       <h1 className="text-4xl font-bold mb-4">About HardMartX</h1>
       <p className="text-lg mb-4">
@@ -35,7 +40,7 @@ function AboutPage() {
         technology on the market. That's why we work hard to bring you the best
         deals and the latest products from the biggest brands in the industry.
       </p>
-    </div>
+    </motion.div>
   );
 }
 
