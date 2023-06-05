@@ -12,10 +12,12 @@ import LicensingPage from "../Pages/LicensingPage";
 import PrivacyPage from "../Pages/PrivacyPage";
 
 import { AnimatePresence } from "framer-motion"
+import AuthStore from "../contexts/AuthStore";
 
 function AnimatedRoutes() {
     const location = useLocation();
   return (
+    <AuthStore>
     <AnimatePresence>
     <Routes location={location} key={location.pathname}>
       <Route path="/" element={<IndexPage />} />
@@ -31,6 +33,7 @@ function AnimatedRoutes() {
       <Route path="/privacy" element={<PrivacyPage />} />
     </Routes>
     </AnimatePresence>
+    </AuthStore>
   );
 }
 

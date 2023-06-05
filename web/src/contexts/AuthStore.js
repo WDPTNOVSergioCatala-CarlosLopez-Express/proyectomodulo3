@@ -21,7 +21,7 @@ function AuthStore({ children }) {
   useEffect(() => {
     async function fetchUser() {
       if (user) {
-        const profile = await userService.get('me');
+        const profile = await userService.detail('me');
         handleUserChange({ ...profile, token: user.token });
       }
     }
