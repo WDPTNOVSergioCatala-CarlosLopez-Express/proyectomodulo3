@@ -16,7 +16,7 @@ function ProductItem({ product }) {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    toast.success("🦄 Wow so easy!", {
+    toast.success("Item added to cart!", {
       position: "bottom-right",
       autoClose: 5000,
       hideProgressBar: false,

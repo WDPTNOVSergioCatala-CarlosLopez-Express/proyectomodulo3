@@ -25,100 +25,11 @@ function Navbar() {
             alt="ecommerce"
           />
         </Link>
-        {user?.email && (
-          <div className="flex items-center flex-grow justify-end mr-5">
-            <button
-              type="button"
-              className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 "
-              id="user-menu-button"
-              aria-expanded="false"
-              data-dropdown-toggle="user-dropdown"
-              data-dropdown-placement="bottom"
-            >
-              <span className="sr-only">Open user menu</span>
-              <img
-                className="w-8 h-8 rounded-full  object-cover"
-                src={user.profilePic}
-                alt="profile piic"
-              />
-            </button>
-            {/* <!-- Dropdown menu --> */}
-            <div
-              className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow  "
-              id="user-dropdown"
-            >
-              <div className="px-4 py-3">
-                <span className="block text-sm text-gray-900 ">
-                  Welcome {user.name}
-                </span>
-                <span className="block text-sm  text-gray-500 truncate ">
-                  {user.email}
-                </span>
-              </div>
-              <ul className="py-2" aria-labelledby="user-menu-button">
-                <li>
-                  <Link
-                    to="/profile"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
-                  >
-                    Profile
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/cart"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
-                  >
-                    Cart
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
-                  >
-                    My orders
-                  </Link>
-                </li>
-              </ul>
-              <div className="py-1">
-                <button
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
-                  onClick={() => logout()}
-                >
-                  Logout
-                </button>
-              </div>
-            </div>
-            <button
-              data-collapse-toggle="mobile-menu-2"
-              type="button"
-              className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
-              aria-controls="mobile-menu-2"
-              aria-expanded="false"
-            >
-              <span className="sr-only">Open main menu</span>
-              <svg
-                className="w-6 h-6"
-                aria-hidden="true"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-            </button>
-          </div>
-        )}
         <div
           className="flex items-center flex-grow justify-center mt-1 ml-48 pl-10"
           id="mobile-menu-2"
         >
-          <ul className="flex mt-12 font-medium  md:p-0 mt-10 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white ">
+          <ul className="flex mt-12 font-medium  md:p-0 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white ">
             <li>
               <Link
                 to="/"
@@ -200,12 +111,97 @@ function Navbar() {
           </ul>
         </div>
         <div className="flex items-center flex-grow justify-end mr-5">
-          <NavLink to="/cart">
-            <FaAi.AiOutlineShoppingCart fill="white" size={40} />
-          </NavLink>
+          <div className="flex items-center">
+            {user?.email ? (
+              <div className="flex items-center flex-grow justify-end mr-5">
+                <button
+                  type="button"
+                  className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 "
+                  id="user-menu-button"
+                  aria-expanded="false"
+                  data-dropdown-toggle="user-dropdown"
+                  data-dropdown-placement="bottom"
+                >
+                  <span className="sr-only">Open user menu</span>
+                  <img
+                    className="w-8 h-8 rounded-full  object-cover"
+                    src={user.profilePic}
+                    alt="profile pic"
+                  />
+                </button>
+                {/* <!-- Dropdown menu --> */}
+                <div
+                  className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow  "
+                  id="user-dropdown"
+                >
+                  <div className="px-4 py-3">
+                    <span className="block text-sm text-gray-900 ">
+                      Welcome {user.name}
+                    </span>
+                    <span className="block text-sm  text-gray-500 truncate ">
+                      {user.email}
+                    </span>
+                  </div>
+                  <ul className="py-2" aria-labelledby="user-menu-button">
+                    <li>
+                      <Link
+                        to="/profile"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
+                      >
+                        Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/cart"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
+                      >
+                        Cart
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
+                      >
+                        My orders
+                      </Link>
+                    </li>
+                  </ul>
+                  <div className="py-1">
+                    <button
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
+                      onClick={() => logout()}
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center flex-grow justify-end mr-5">
+                <Link
+                  to="/register"
+                  className="text-sm text-gray-300 hover:text-white mx-4"
+                >
+                  Register
+                </Link>
+                <Link
+                  to="/login"
+                  className="text-sm text-gray-300 hover:text-white mx-4"
+                >
+                  Login
+                </Link>
+              </div>
+            )}
+            <div className="flex items-center flex-grow justify-end mr-5">
+              <NavLink to="/cart">
+                <FaAi.AiOutlineShoppingCart fill="white" size={40} />
+              </NavLink>
+            </div>
+          </div>
         </div>
       </div>
-      <div></div>
     </nav>
   );
 }

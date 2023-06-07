@@ -1,18 +1,27 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../contexts/AuthStore";
+import { motion } from "framer-motion";
 
 function ProfilePage() {
   const { user } = useContext(AuthContext);
-  const { register, handleSubmit, formState: { errors }, reset } = useForm();
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
 
   const onSubmit = (data) => {
-    
     reset();
   };
   return (
-    <div className="flex justify-center border border-gray-300 rounded-lg p-4">
+    <motion.div
+      className="flex justify-center border border-gray-300 rounded-lg p-4"
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.25 } }}
+    >
       <div className="max-w-xs">
         <form onSubmit={handleSubmit(onSubmit)}>
           <img
@@ -24,7 +33,10 @@ function ProfilePage() {
             {user.name} {user.surname}
           </h1>
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="username">
+            <label
+              className="block text-gray-700 font-bold mb-2"
+              htmlFor="username"
+            >
               Username
             </label>
             <input
@@ -35,10 +47,15 @@ function ProfilePage() {
               {...register("username")}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
-            {errors.username && <span className="text-red-500">{errors.username.message}</span>}
+            {errors.username && (
+              <span className="text-red-500">{errors.username.message}</span>
+            )}
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
+            <label
+              className="block text-gray-700 font-bold mb-2"
+              htmlFor="email"
+            >
               Email
             </label>
             <input
@@ -49,10 +66,15 @@ function ProfilePage() {
               {...register("email")}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
-            {errors.email && <span className="text-red-500">{errors.email.message}</span>}
+            {errors.email && (
+              <span className="text-red-500">{errors.email.message}</span>
+            )}
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="address">
+            <label
+              className="block text-gray-700 font-bold mb-2"
+              htmlFor="address"
+            >
               Address
             </label>
             <input
@@ -63,7 +85,9 @@ function ProfilePage() {
               {...register("address")}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
-            {errors.address && <span className="text-red-500">{errors.address.message}</span>}
+            {errors.address && (
+              <span className="text-red-500">{errors.address.message}</span>
+            )}
           </div>
           <div className="flex items-center justify-between">
             <button
@@ -75,7 +99,7 @@ function ProfilePage() {
           </div>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

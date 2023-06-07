@@ -37,7 +37,7 @@ function Cart() {
     return <div>Loading...</div>;
   }
   if (!cart) {
-    return <div>Error: Cart not found.</div>;
+    return <div>Debes iniciar sesión para poder acceder a tu carrito</div>;
   }
   function getTotalPrice() {
     let total = 0
@@ -50,7 +50,7 @@ function Cart() {
   function handleCheckout() {
     const orderItems = cart.items.map(item => {
       return {
-        product: item.product._id,
+        product: item.product.id,
         quantity: item.quantity
       }
     });
@@ -71,7 +71,7 @@ function Cart() {
       paymentMethod
     })
       .then(order => {
-        navigate(`/order/${order._id}`);
+        navigate(`/order/${order.id}`);
       })
       .catch(error => {
         console.error(error);
@@ -80,10 +80,10 @@ function Cart() {
 
   return (
     <div class="mx-auto">
-      <h1 class="text-center mb-4 text-3xl font-bold">Shopping Cart</h1>
-      <table class="border-collapse border-2 border-gray-500 mx-auto">
+      <h1 class="text-center mb-4 text-3xl font-bold rounded-lg">Shopping Cart</h1>
+      <table class="border-collapse border-2 border-gray-500 mx-auto rounded-lg">
         <thead>
-          <tr class="bg-gray-200">
+          <tr class="bg-slate-950 text-white rounded">
             <th class="p-2">Product</th>
             <th class="p-2">Unit Price</th>
             <th class="p-2">Quantity</th>
@@ -94,7 +94,7 @@ function Cart() {
         <tbody>
           {cart.items && cart.items.length > 0 && (
             cart.items.map((item) => (
-              <tr key={item.product._id}>
+              <tr key={item.product.id}>
                 <td class="p-2">{item.product.name}</td>
                 <td class="p-2">{item.product.price}</td>
                 <td class="p-2">
@@ -129,7 +129,7 @@ function Cart() {
           )}
         </tbody>
         <tfoot>
-          <tr class="bg-gray-200">
+          <tr class="bg-slate-950 text-white">
             <td class="p-2" colSpan="3">Total: {getTotalPrice().toFixed(2)} €</td>
           </tr>
         </tfoot>
