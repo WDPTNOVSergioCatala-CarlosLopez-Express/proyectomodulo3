@@ -10,6 +10,8 @@ const createError = require("http-errors");
 require('./config/db.config')
 const app = express();
 
+app.use(express.static(__dirname + '/public'))
+
 const cors = require("./config/cors.config");
 app.use(cors);
 app.use(logger("dev"));
